@@ -11,6 +11,9 @@ public class SimpleArray<T> implements Iterable<T> {
     private int modCount = 0;
 
     public SimpleArray(int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Capacity < 0");
+        }
         this.data = new Object[capacity];
     }
 
