@@ -20,17 +20,9 @@ public class SimpleArray<T> {
     }
 
     public boolean add(T model) {
-        if (size == data.length) {
-            data = grow(data);
-        }
+        Objects.checkIndex(size + 1, data.length);
         data[size++] = model;
         return true;
-    }
-
-    private Object[] grow(Object[] data) {
-        Object[] dst = new Object[2 * data.length + 1];
-        System.arraycopy(data, 0, dst, 0, size);
-        return dst;
     }
 
     public boolean set(int index, T model) {

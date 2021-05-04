@@ -49,7 +49,7 @@ public class SimpleArrayTest {
         assertThat(simpleArray.get(0), is(1));
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenCreateEmptyAndAddElement() {
         SimpleArray<String> simpleArray = new SimpleArray<>(0);
         simpleArray.add("first");
