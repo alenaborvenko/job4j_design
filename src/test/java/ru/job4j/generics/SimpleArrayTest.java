@@ -98,7 +98,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenIter(){
+    public void whenIter() {
         Iterator<?> it = input.iterator();
         assertThat(it.next(), is("first"));
         assertTrue(it.hasNext());

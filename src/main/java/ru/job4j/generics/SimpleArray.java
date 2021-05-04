@@ -49,6 +49,8 @@ public class SimpleArray<T> {
         return true;
     }
 
+
+    @SuppressWarnings("unchecked")
     public T get(int index) {
         Objects.checkIndex(index, size);
         return (T) data[index];
@@ -67,6 +69,7 @@ public class SimpleArray<T> {
             return cursor < size;
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         public T next() {
             if (!hasNext()) {
