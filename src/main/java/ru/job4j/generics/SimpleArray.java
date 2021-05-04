@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleArray<T> {
-    private Object[] data;
+    private final Object[] data;
     private int size = 0;
 
     public SimpleArray(int capacity) {
@@ -20,7 +20,7 @@ public class SimpleArray<T> {
     }
 
     public boolean add(T model) {
-        Objects.checkIndex(size + 1, data.length);
+        Objects.checkIndex(size, data.length);
         data[size++] = model;
         return true;
     }
@@ -53,7 +53,6 @@ public class SimpleArray<T> {
     }
 
     private class Iter implements Iterator<T> {
-        private final Object[] data = SimpleArray.this.data;
         private int cursor = 0;
 
         @Override
