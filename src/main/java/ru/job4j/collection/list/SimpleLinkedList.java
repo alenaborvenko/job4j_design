@@ -75,6 +75,7 @@ public class SimpleLinkedList<E> implements List<E> {
     private class IterList implements Iterator<E> {
         private final int expectedModCount = modCount;
         private int cursor = 0;
+        Node<E> current = first;
 
         /**
          * Метод, позволяющий узнать, если в коллекции еще элементы
@@ -97,10 +98,8 @@ public class SimpleLinkedList<E> implements List<E> {
                 throw new NoSuchElementException();
             }
             checkModifier();
-            Node<E> tmp = first;
-            for (int i = 0; i < cursor; i++) {
-                tmp = tmp.next;
-            }
+            Node<E> tmp = current;
+            current = current.next;
             cursor++;
             return tmp.item;
         }
