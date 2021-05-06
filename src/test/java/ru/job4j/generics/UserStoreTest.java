@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class UserStoreTest {
 
-    private Store<User> userStore = new UserStore();
+    private final Store<User> userStore = new UserStore();
 
     @Before
     public void setUp() {

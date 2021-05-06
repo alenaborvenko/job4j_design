@@ -2,7 +2,6 @@ package ru.job4j.generics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public final class MemStore<T extends Base> implements Store<T> {
 
@@ -10,29 +9,33 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public void add(T model) {
-        if (findById(model.getId()) == null) {
+        if (model != null && indexById(model.getId()) == -1) {
             mem.add(model);
         }
     }
 
     @Override
     public boolean replace(String id, T model) {
-        T find = findById(id);
-        if (find == null) {
+        int index = indexById(id);
+        if (index == -1) {
             return false;
         }
-        mem.set(indexOf(find), model);
+        mem.set(index, model);
         return true;
     }
 
-    private int indexOf(T byId) {
-        return mem.indexOf(byId);
+    private int indexById(String id) {
+        for (int i = 0; i < mem.size(); i++) {
+            if (mem.get(i).getId().equals(id)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public boolean delete(String id) {
-        T find = findById(id);
-        int index = indexOf(find);
+        int index = indexById(id);
         if (index == -1) {
             return false;
         }
@@ -42,10 +45,8 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public T findById(String id) {
-        return mem.stream()
-                .filter(s -> Objects.equals(s.getId(), id))
-                .findFirst()
-                .orElse(null);
+        int index = indexById(id);
+        return index != -1 ? mem.get(index) : null;
     }
 
     @Override
