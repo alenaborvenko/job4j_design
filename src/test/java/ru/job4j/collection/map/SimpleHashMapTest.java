@@ -74,8 +74,8 @@ public class SimpleHashMapTest {
 
     @Test
     public void whenResize() {
-        input.insert("fourth",4);
-        input.insert("fifth",5);
+        input.insert("fourth", 4);
+        input.insert("fifth", 5);
         assertThat(input.size(), is(5));
         assertThat(input.get("first"), is(1));
         assertThat(input.get("second"), is(2));
