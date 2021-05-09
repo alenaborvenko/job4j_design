@@ -8,7 +8,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = ".\\src\\main\\java\\ru\\job4j\\io\\pairWithoutComment.properties";
+        String path = "./src/main/java/ru/job4j/io/pairWithoutComment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"), is("Alena Borvenko"));
@@ -19,7 +19,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithComment() {
-        String path = ".\\src\\main\\java\\ru\\job4j\\io\\pairWithComment.properties";
+        String path = "./src/main/java/ru/job4j/io/pairWithComment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"), is("Alena Borvenko"));
@@ -30,7 +30,7 @@ public class ConfigTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenExceptionPatternPair() {
-        String path = ".\\src\\main\\java\\ru\\job4j\\io\\patternException.properties";
+        String path = "./src/main/java/ru/job4j/io/patternException.properties";
         Config config = new Config(path);
         config.load();
     }
