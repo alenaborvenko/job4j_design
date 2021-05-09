@@ -11,10 +11,10 @@ public class ConfigTest {
         String path = ".\\src\\main\\java\\ru\\job4j\\io\\pairWithoutComment.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"),is("Alena Borvenko"));
-        assertThat(config.value("age"),is("30"));
-        assertThat(config.value("weight"),is("59"));
-        assertThat(config.value("height"),is("167"));
+        assertThat(config.value("name"), is("Alena Borvenko"));
+        assertThat(config.value("age"), is("30"));
+        assertThat(config.value("weight"), is("59"));
+        assertThat(config.value("height"), is("167"));
     }
 
     @Test
@@ -22,10 +22,10 @@ public class ConfigTest {
         String path = ".\\src\\main\\java\\ru\\job4j\\io\\pairWithComment.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"),is("Alena Borvenko"));
-        assertThat(config.value("age"),is("30"));
-        assertThat(config.value("weight"),is("59"));
-        assertThat(config.value("height"),is("167"));
+        assertThat(config.value("name"), is("Alena Borvenko"));
+        assertThat(config.value("age"), is("30"));
+        assertThat(config.value("weight"), is("59"));
+        assertThat(config.value("height"), is("167"));
     }
 
     @Test(expected = IllegalArgumentException.class)
