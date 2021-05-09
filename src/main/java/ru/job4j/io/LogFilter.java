@@ -21,8 +21,21 @@ public class LogFilter {
         return filter;
     }
 
-    public static void main(String[] args) {
+    public static void save(List<String> log, String file) {
+        try (PrintWriter writer = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(file)))) {
+            for (String writeString : log) {
+                writer.println(writeString);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public static void main(String[] args) {
         List<String> log = filter("log.txt");
         System.out.println(log);
+        save(log, "404.txt");
     }
 }
