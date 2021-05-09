@@ -17,15 +17,15 @@ public class AnalizyTest {
     public void whenTestUnavailable() throws IOException {
         File sourceFile = temp.newFile("server.log");
         try (PrintWriter pw = new PrintWriter(sourceFile)) {
-            pw.print("200 10:56:01\n" +
-                    "500 10:57:01\n" +
-                    "400 10:58:01\n" +
-                    "200 10:59:01\n" +
-                    "500 11:01:02\n" +
-                    "200 11:02:02\n" +
-                    "400 13:54:00\n" +
-                    "500 13:56:45\n" +
-                    "200 15:27:09");
+            pw.print("200 10:56:01" + System.lineSeparator()
+                    + "500 10:57:01" + System.lineSeparator()
+                    + "400 10:58:01\n" + System.lineSeparator()
+                    + "200 10:59:01\n" + System.lineSeparator()
+                    + "500 11:01:02\n" + System.lineSeparator()
+                    + "200 11:02:02\n" + System.lineSeparator()
+                    + "400 13:54:00\n" + System.lineSeparator()
+                    + "500 13:56:45\n" + System.lineSeparator()
+                    + "200 15:27:09");
         }
         String source = sourceFile.toString();
         String target = temp.newFile("target.log").toString();
