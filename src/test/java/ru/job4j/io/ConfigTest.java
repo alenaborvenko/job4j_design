@@ -34,4 +34,14 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
     }
+
+    @Test
+    public void whenToString()  {
+        String path = "./src/main/java/ru/job4j/io/pairWithoutComment.properties";
+        Config config = new Config(path);
+        assertThat(config.toString(), is("name=Alena Borvenko" + System.lineSeparator()
+                + "age=30" + System.lineSeparator()
+                + "height=167" + System.lineSeparator()
+                + "weight=59"));
+    }
 }

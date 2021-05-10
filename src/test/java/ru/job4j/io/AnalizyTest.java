@@ -17,15 +17,16 @@ public class AnalizyTest {
     public void whenTestUnavailable() throws IOException {
         File sourceFile = temp.newFile("server.log");
         try (PrintWriter pw = new PrintWriter(sourceFile)) {
-            pw.print("200 10:56:01" + System.lineSeparator()
-                    + "500 10:57:01" + System.lineSeparator()
-                    + "400 10:58:01" + System.lineSeparator()
-                    + "200 10:59:01" + System.lineSeparator()
-                    + "500 11:01:02" + System.lineSeparator()
-                    + "200 11:02:02" + System.lineSeparator()
-                    + "400 13:54:00" + System.lineSeparator()
-                    + "500 13:56:45" + System.lineSeparator()
-                    + "200 15:27:09");
+            pw.println("200 10:56:01");
+            pw.println();
+            pw.println("500 10:57:01");
+            pw.println("400 10:58:01");
+            pw.println("200 10:59:01");
+            pw.println("500 11:01:02");
+            pw.println("200 11:02:02");
+            pw.println("400 13:54:00");
+            pw.println("500 13:56:45");
+            pw.println("200 15:27:09");
         }
         String source = sourceFile.toString();
         String target = temp.newFile("target.log").toString();
@@ -36,5 +37,17 @@ public class AnalizyTest {
         }
         assertThat(rsl.toString(), is("10:57:01;10:59:01;" + "11:01:02;11:02:02;"
                                         + "13:54:00;15:27:09;"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenTestNotUnavailable() throws IOException {
+        File sourceFile = temp.newFile("server.log");
+        try (PrintWriter pw = new PrintWriter(sourceFile)) {
+            pw.println("200");
+            pw.println();
+        }
+        String source = sourceFile.toString();
+        String target = temp.newFile("target.log").toString();
+        Analizy.unavailable(source, target);
     }
 }
