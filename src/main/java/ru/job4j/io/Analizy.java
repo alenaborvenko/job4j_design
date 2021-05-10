@@ -20,7 +20,7 @@ public class Analizy {
                     if (timeStart == null) {
                         timeStart = parseLine[1];
                     }
-                } else if (timeStart != null) {
+                } else if (timeStart != null && ("200".equals(parseLine[0]) || "300".equals(parseLine[0]))) {
                     printWriter.printf("%s;%s;%n", timeStart, parseLine[1]);
                     timeStart = null;
                 }
