@@ -16,13 +16,11 @@ class SimpleTree<E> implements Tree<E> {
         if (parentNode.isEmpty()) {
             return false;
         }
-        List<Node<E>> children = parentNode.get().children;
-
-        for (Node<E> elem : children) {
-            if (elem.value.equals(child)) {
-                return false;
-            }
+        Optional<Node<E>> findChild = findBy(child);
+        if (findChild.isPresent()) {
+            return false;
         }
+        List<Node<E>> children = parentNode.get().children;
         children.add(new Node<>(child));
         return true;
     }

@@ -45,6 +45,15 @@ public class TreeTest {
     }
 
     @Test
+    public void whenChildIsPresentAnotherParent() {
+        Tree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        assertFalse(tree.add(2, 3));
+    }
+
+    @Test
     public void whenTreeNotBinary() {
         Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
