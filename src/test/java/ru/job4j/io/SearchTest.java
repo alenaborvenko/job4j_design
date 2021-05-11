@@ -17,7 +17,7 @@ public class SearchTest {
 
     @Before
     public void setUp() {
-        path = Paths.get(".");
+        path = Paths.get("./src");
     }
 
     @Test
@@ -27,8 +27,8 @@ public class SearchTest {
     }
 
     @Test
-    public void when5FoundFile() throws IOException {
+    public void when3FoundFile() throws IOException {
         Predicate<Path> condition = s -> s.toFile().getName().endsWith(".properties");
-        assertThat(Search.search(path, condition).size(), is(5));
+        assertThat(Search.search(path, condition).size(), is(3));
     }
 }
