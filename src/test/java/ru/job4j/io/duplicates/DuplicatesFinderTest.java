@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class DuplicatesFinderTest {
     @Rule
@@ -40,7 +42,8 @@ public class DuplicatesFinderTest {
         df.search(folder.getRoot().toPath());
         assertFalse(df.getDuplicates().isEmpty());
         assertEquals(2, df.getDuplicates().size());
-        assertThat(df.getDuplicates().get(0), is(new FileProperty(0, "new.java")));
-        assertThat(df.getDuplicates().get(1), is(new FileProperty(0, "new.xml")));
+        assertThat(df.getDuplicates(), containsInAnyOrder(
+                new FileProperty(0, "new.xml"),
+                new FileProperty(0, "new.java")));
     }
 }
