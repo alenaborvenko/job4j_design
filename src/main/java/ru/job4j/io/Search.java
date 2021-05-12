@@ -21,6 +21,7 @@ public class Search {
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
+        pathList.clear();
         SearchFiles searcher = new SearchFiles(condition, pathList);
         Files.walkFileTree(root, searcher);
         return pathList;
