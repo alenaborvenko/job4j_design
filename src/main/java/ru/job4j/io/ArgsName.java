@@ -8,8 +8,8 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        if (values.isEmpty()) {
-            throw new IllegalArgumentException("Empty parameters in the system");
+        if (!values.containsKey(key)) {
+            throw new IllegalArgumentException("Not found " + key);
         }
         return values.get(key);
     }
