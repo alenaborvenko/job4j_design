@@ -8,13 +8,13 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("Not found " + key);
-        }
         return values.get(key);
     }
 
     private void parse(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Empty args. Usage -key=value");
+        }
         for (String param : args) {
             if (!param.startsWith("-")) {
                 throw new IllegalArgumentException("Key not starts with -. Usage -key=value");
