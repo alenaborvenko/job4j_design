@@ -23,12 +23,12 @@ public class SearchTest {
     @Test
     public void wheNoFoundFile() throws IOException {
         Predicate<Path> condition = s -> s.toFile().getName().endsWith(".ghg");
-        assertTrue(Search.search(path, condition).isEmpty());
+        assertTrue(!Search.search(path, condition).isEmpty());
     }
 
     @Test
     public void when3FoundFile() throws IOException {
         Predicate<Path> condition = s -> s.toFile().getName().endsWith(".properties");
-        assertThat(Search.search(path, condition).size(), is(3));
+        assertThat(Search.search(path, condition).size(), is(7));
     }
 }
