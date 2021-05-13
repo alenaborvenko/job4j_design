@@ -17,7 +17,7 @@ public class SearchTest {
 
     @Before
     public void setUp() {
-        path = Paths.get("./src/main/java");
+        path = Paths.get("./src/main/java/ru/job4j/io");
     }
 
     @Test
