@@ -17,9 +17,9 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
+                    String str = in.readLine();
                     String msg;
-                    while (!(str = in.readLine()).isEmpty()) {
+                    while (!str.isEmpty()) {
                         if (str.contains("GET /?msg=")) {
                             msg = str.split(" ")[1].split("=")[1];
                             if ("Exit".equals(msg)) {
@@ -37,6 +37,7 @@ public class EchoServer {
                             out.flush();
                         }
                         System.out.println(str);
+                        str = in.readLine();
                     }
                 }
             }
