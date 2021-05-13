@@ -17,7 +17,7 @@ public class SearchTest {
 
     @Before
     public void setUp() {
-        path = Paths.get("./src");
+        path = Paths.get("./src/main/java");
     }
 
     @Test
