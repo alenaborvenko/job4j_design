@@ -34,9 +34,9 @@ public class ContactTest {
         assertThat(contact.toString(), is(
                 "Contact[zipCode="
                 + contact.getZipCode()
-                +", phone='"
+                + ", phone='"
                 + contact.getPhone()
-                +"']"
+                + "']"
         ));
     }
 
