@@ -18,6 +18,26 @@ public class Student {
         this.course = course;
     }
 
+    public boolean isSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getCourse() {
+        return course;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
