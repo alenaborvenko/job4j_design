@@ -1,14 +1,26 @@
 package ru.job4j.serializable;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.StringJoiner;
 
+@XmlRootElement(name = "student")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
+    @XmlAttribute
     private boolean sex;
+    @XmlAttribute
     private int age;
+    @XmlAttribute
     private String name;
     private Contact contact;
+    @XmlElementWrapper(name = "courses")
+    @XmlElement(name = "course")
     private String[] course;
+
+    public Student() {
+    }
 
     public Student(boolean sex, int age, String name, Contact contact, String... course) {
         this.sex = sex;
@@ -36,6 +48,29 @@ public class Student {
 
     public String[] getCourse() {
         return course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Student student = (Student) o;
+        return sex == student.sex
+                && age == student.age
+                && Objects.equals(name, student.name)
+                && Objects.equals(contact, student.contact)
+                && Arrays.equals(course, student.course);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(sex, age, name, contact);
+        result = 31 * result + Arrays.hashCode(course);
+        return result;
     }
 
     @Override

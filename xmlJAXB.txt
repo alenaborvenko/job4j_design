@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<student sex="false" age="30" name="Den">
+    <contact zipCode="30" phone="7867"/>
+    <courses>
+        <course>Math</course>
+        <course>Computer science</course>
+    </courses>
+</student>
