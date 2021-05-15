@@ -6,12 +6,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 
 public class FindTest {
@@ -47,16 +51,24 @@ public class FindTest {
     public void whenTestMainFileNameFindToFile() throws IOException {
         Find.main(args);
         List<String> rsl = Files.readAllLines(log.toPath());
-        assertThat(rsl.toString(), is("[" + Path.of(folder.getRoot() + "/1.txt")
-                + ", " + Path.of(folder.getRoot() + "/list/1.txt") + "]"));
+        assertThat(rsl,  containsInAnyOrder(
+                       Path.of(folder.getRoot() + "/1.txt").toString(),
+                       Path.of(folder.getRoot() + "/list/1.txt").toString()
+                ));
     }
 
     @Test
     public void whenTestMainFileNameFindToConsole() throws IOException {
         args[3] = "-o=console";
         Find.main(args);
-        assertThat(print.toString(), is("[" + Path.of(folder.getRoot() + "/1.txt")
-                + ", " + Path.of(folder.getRoot() + "/list/1.txt") + "]"));
+        List<String> actual = Arrays.asList(print.toString().split(", "));
+        actual.set(0, actual.get(0).substring(1));
+        int indexLastActual = actual.size() - 1;
+        int sizeString = actual.get(indexLastActual).length();
+        actual.set(indexLastActual, actual.get(indexLastActual).substring(0, sizeString - 1));
+        assertThat(actual, containsInAnyOrder(
+                Path.of(folder.getRoot() + "/1.txt").toString(),
+                Path.of(folder.getRoot() + "/list/1.txt").toString()));
     }
 
     @Test
@@ -65,12 +77,12 @@ public class FindTest {
         args[1] = "-n=*.txt";
         Find.main(args);
         List<String> rsl = Files.readAllLines(log.toPath());
-        assertThat(rsl.toString(), is(
-                "[" + Path.of(folder.getRoot() + "/1.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list/1.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/log.txt") + "]"
+        assertThat(rsl, containsInAnyOrder(
+                        Path.of(folder.getRoot() + "/1.txt").toString(),
+                        Path.of(folder.getRoot() + "/list/1.txt").toString(),
+                        Path.of(folder.getRoot() + "/list/list.txt").toString(),
+                        Path.of(folder.getRoot() + "/list.txt").toString(),
+                        Path.of(folder.getRoot() + "/log.txt").toString()
         ));
     }
 
@@ -80,12 +92,17 @@ public class FindTest {
         args[1] = "-n=*.txt";
         args[3] = "-o=console";
         Find.main(args);
-        assertThat(print.toString(), is(
-                "[" + Path.of(folder.getRoot() + "/1.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list/1.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/log.txt") + "]"
+        List<String> actual = Arrays.asList(print.toString().split(", "));
+        actual.set(0, actual.get(0).substring(1));
+        int indexLastActual = actual.size() - 1;
+        int sizeString = actual.get(indexLastActual).length();
+        actual.set(indexLastActual, actual.get(indexLastActual).substring(0, sizeString - 1));
+        assertThat(actual, containsInAnyOrder(
+                Path.of(folder.getRoot() + "/1.txt").toString(),
+                        Path.of(folder.getRoot() + "/list/1.txt").toString(),
+                        Path.of(folder.getRoot() + "/list/list.txt").toString(),
+                        Path.of(folder.getRoot() + "/list.txt").toString(),
+                        Path.of(folder.getRoot() + "/log.txt").toString()
         ));
     }
 
@@ -95,9 +112,9 @@ public class FindTest {
         args[1] = "-n=.i[w]*";
         Find.main(args);
         List<String> rsl = Files.readAllLines(log.toPath());
-        assertThat(rsl.toString(), is(
-                "[" + Path.of(folder.getRoot() + "/list/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list.txt") + "]"
+        assertThat(rsl, containsInAnyOrder(
+                Path.of(folder.getRoot() + "/list/list.txt").toString(),
+                        Path.of(folder.getRoot() + "/list.txt").toString()
         ));
     }
 
@@ -107,9 +124,14 @@ public class FindTest {
         args[1] = "-n=.i[w]*";
         args[3] = "-o=console";
         Find.main(args);
-        assertThat(print.toString(), is(
-                "[" + Path.of(folder.getRoot() + "/list/list.txt")
-                        + ", " + Path.of(folder.getRoot() + "/list.txt") + "]"
+        List<String> actual = Arrays.asList(print.toString().split(", "));
+        actual.set(0, actual.get(0).substring(1));
+        int indexLastActual = actual.size() - 1;
+        int sizeString = actual.get(indexLastActual).length();
+        actual.set(indexLastActual, actual.get(indexLastActual).substring(0, sizeString - 1));
+        assertThat(actual, containsInAnyOrder(
+                Path.of(folder.getRoot() + "/list/list.txt").toString(),
+                       Path.of(folder.getRoot() + "/list.txt").toString()
         ));
     }
 
