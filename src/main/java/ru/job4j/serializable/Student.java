@@ -10,11 +10,15 @@ import java.util.StringJoiner;
 public class Student {
     @XmlAttribute
     private boolean sex;
+
     @XmlAttribute
     private int age;
+
     @XmlAttribute
     private String name;
+
     private Contact contact;
+
     @XmlElementWrapper(name = "courses")
     @XmlElement(name = "course")
     private String[] course;
