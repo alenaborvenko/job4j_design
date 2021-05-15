@@ -37,7 +37,7 @@ public class ConsoleChat {
                     contin = true;
                 }
             }
-            String botAnswer = answer.get(rand.nextInt(answer.size() - 1));
+            String botAnswer = answer.get(rand.nextInt(answer.size()));
             System.out.println(botAnswer);
             saveDialog(question);
             saveDialog(botAnswer);
