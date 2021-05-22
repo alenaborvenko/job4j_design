@@ -38,13 +38,7 @@ public class Find {
         if ("name".equals(selectionFind)) {
             condition = s -> s.toFile().getName().equals(nameFile);
         } else if ("mask".equals(selectionFind)) {
-            condition = s -> {
-                String tmpName = nameFile;
-                if (tmpName.startsWith("*")) {
-                    tmpName = tmpName.substring(1);
-                }
-                return s.toFile().getName().endsWith(tmpName);
-            };
+            condition = s ->  s.toFile().getName().contains(nameFile.replace("*", ""));
         } else if ("regEx".equalsIgnoreCase(selectionFind)) {
             condition = s -> {
                 Pattern pattern = Pattern.compile(nameFile);
