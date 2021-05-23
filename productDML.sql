@@ -33,7 +33,8 @@ on p.type_id = t.id and t.name like '%cheese%';
 
 select p.name from product p where p."name" like '%icecream%';
 
-select p.name from product p where current_date + interval '1 month' >= p.expired_date; 
+select p.name from product p 
+where extract(month from p.expired_date::date) = extract(month from (current_date + interval '1 month')::date); 
 
 select p.name, max(p.price) from product p 
 group by p.name
