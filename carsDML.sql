@@ -45,8 +45,8 @@ select * from car;
 
 select c.name as name, cb.number_body as number_body, e.number_engine as number_engine, t.name as transmission
 from car c 
-join car_body cb on c.car_body_id = cb.id 
-join engine e on c.engine_id = e.id 
+join car_body cb on c.car_body_id = cb.id
+join engine e on c.engine_id = e.id
 join transmission t on c.transmission_id  = t.id
 order by c."name", number_body, number_engine, transmission  ;
 
