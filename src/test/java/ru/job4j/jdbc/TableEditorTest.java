@@ -33,8 +33,8 @@ public class TableEditorTest {
     public void whenCreateTable() throws SQLException {
         tableEditor.dropTable("test");
         tableEditor.createTable("test");
-        assertThat(tableEditor.getScheme("test"), is(String.format("%-15s %-15s%n", "column", "type") +
-                String.format("%-15s %-15s%n", "id", "serial")));
+        assertThat(tableEditor.getScheme("test"), is(String.format("%-15s %-15s%n", "column", "type")
+                + String.format("%-15s %-15s%n", "id", "serial")));
     }
 
     @Test
