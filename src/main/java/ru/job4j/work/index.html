@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> Пример простой страницы html</title>
+</head>
+<body>
+<form name="first" method="post" action="/welcome">
+    <input type="text" name="enter" value="enter password" id = "password">
+    <input type="submit" name="enter" onclick="sendJson()">
+</form>
+<script type="text/javascript">
+    function sendJson() {
+        var obj, dbParam, xmlhttp;
+        obj = {"passport": document.getElementById("password").value};
+        dbParam = JSON.stringify(obj);
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/welcome", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send(dbParam);
+    }
+</script>
+</body>
+</html>
